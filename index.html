@@ -4,8 +4,75 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lesson App</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://unpkg.com/vue@2.7.8/dist/vue.js"></script>
 </head>
 <body>
-    
+    <div id="app">
+        <header>
+            <h1 v-text="sitename"></h1>
+            <button >
+                <!-- 'cartItemCount' is used the same way as a data property. -->
+                {{ cartItemCount }}
+                <!-- add the cart icon -->
+                <span class="fas fa-cart-plus"></span> Checkout
+                </button>
+        </header>
+        <main>
+            <div>
+                <figure>
+                    <img v-bind:src="information.image" style="width:100px">
+                </figure>
+                <p>Subject: {{information.subject}}</p>
+                <p>Location: {{information.Location}}</p>
+                <p>Price: {{information.Price}}</p>
+                <p>Space: {{ SpaceLeft}}</p>
+
+                <button v-on:click="addtocart" v-if="canAddToCart">Add to cart</button>
+                <button disabled='disabled' v-else>Add to cart</button>
+                <span v-if="SpaceLeft === 0"> All out! </span>
+                <span v-else-if="SpaceLeft <=3">only {{SpaceLeft}} left! </span>
+                <span v-else> Buy now!</span> 
+            </div>
+        </main>
+    </div>
+
+    <script type="text/javascript">
+        var webstore = new Vue({
+            el: '#app',
+            data: {
+                sitename: 'Lessons Infomation',
+                information:{
+                    id: 1,
+                    subject: "Math",
+                    Location:"London",
+                    Price:100,
+                    image: "images/math.webp",
+                    Space:5
+                },
+                cart:[]
+            
+            },
+            methods: {
+                
+                addtocart: function(){
+                    this.cart.push(this.information.id);
+                }
+                
+            },
+            computed: {
+                 cartItemCount: function() {
+                 return this.cart.length || "";
+             },
+                canAddToCart: function() {
+                return this.information.Space > this.cartItemCount;
+             },
+
+             SpaceLeft() {
+                return this.information.Space - this.cartItemCount;
+             }
+         }
+        })
+    </script>
 </body>
 </html>
