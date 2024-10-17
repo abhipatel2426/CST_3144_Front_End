@@ -40,6 +40,17 @@
             <div v-else>
                 <!--the code for the checkout page-->
                 <h2>Shopping cart</h2>
+                <div v-if="cart.length > 0">
+                    <div v-for="lesson in cart" :key="lesson.id">
+                        <p>Subject: {{ lesson.subject}}</p>
+                        <p>Location: {{ lesson.Location }}</p>
+                        <p>Price: {{ lesson.Price }}</p>
+                        <button v-on:click="removeFromCart(lesson)">Remove</button>
+                    </div>
+                </div>
+                <div v-else>
+                    <h3>Your cart is empty</h3>
+                </div>
             </div>
         </main>
     </div>
@@ -93,6 +104,12 @@
                 
                 addtocart: function(lesson){
                     this.cart.push(lesson.id);
+                },
+                removeFromCart: function(lesson){
+                    let index = this.cart.indexOf(lesson);
+                    if (index !== -1) {
+                        this.cart.splice(index, 1); 
+                    }
                 },
                 showCheckout(){
                     this.showinformation = this.showinformation ? false : true
