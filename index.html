@@ -11,7 +11,7 @@
     <div id="app">
         <header>
             <h1 v-text="sitename"></h1>
-            <button >
+            <button v-on:click="showCheckout" >
                 <!-- 'cartItemCount' is used the same way as a data property. -->
                 {{ cartItemCount }}
                 <!-- add the cart icon -->
@@ -19,58 +19,98 @@
                 </button>
         </header>
         <main>
-            <div>
-                <figure>
-                    <img v-bind:src="information.image" style="width:100px">
-                </figure>
-                <p>Subject: {{information.subject}}</p>
-                <p>Location: {{information.Location}}</p>
-                <p>Price: {{information.Price}}</p>
-                <p>Space: {{ SpaceLeft}}</p>
+            <div v-if="showinformation">
+                <div v-for="lesson in lessons" :key="lesson.id">
 
-                <button v-on:click="addtocart" v-if="canAddToCart">Add to cart</button>
+                <figure>
+                    <img v-bind:src="lesson.image" style="width:100px">
+                </figure>
+                <p>Subject: {{ lesson.subject}}</p>
+                <p>Location: {{ lesson.Location}}</p>
+                <p>Price: {{ lesson .Price}}</p>
+                <p>Space: {{ spaceLeft(lesson) }}</p>
+
+                <button v-on:click="addtocart(lesson)" v-if="canAddToCart(lesson)">Add to cart</button>
                 <button disabled='disabled' v-else>Add to cart</button>
-                <span v-if="SpaceLeft === 0"> All out! </span>
-                <span v-else-if="SpaceLeft <=3">only {{SpaceLeft}} left! </span>
+                <span v-if="spaceLeft(lesson) === 0"> All out! </span>
+                <span v-else-if="spaceLeft(lesson) <= 2">only {{spaceLeft(lesson)}} left! </span>
                 <span v-else> Buy now!</span> 
+            </div>
+        </div>
+            <div v-else>
+                <!--the code for the checkout page-->
+                <h2>Shopping cart</h2>
             </div>
         </main>
     </div>
 
     <script type="text/javascript">
+
+        let lessons = [
+            {
+                "id": 1,
+                "subject": "Math",
+                "Location":"London",
+                "Price":100,
+                "image": "images/math.webp",
+                "Space":5
+            },
+            {       "id": 2,
+                    "subject": "Science",
+                    "Location":"New York",
+                    "Price":120,
+                    "image": "images/science.png",
+                    "Space":3},
+            {       "id": 3,
+                    "subject": "Music",
+                    "Location":"London",
+                    "Price":140,
+                    "image": "images/music.png",
+                    "Space":4},
+            {       "id": 4,
+                    "subject": "English",
+                    "Location":"London",
+                    "Price":300,
+                    "image": "images/english.png",
+                    "Space":5},
+            {       "id": 5,
+                    "subject": "Sport",
+                    "Location":"Mehasana",
+                    "Price":400,
+                    "image": "images/sport.png",
+                    "Space":5 }
+        ]
         var webstore = new Vue({
             el: '#app',
             data: {
+                showinformation:true,
                 sitename: 'Lessons Infomation',
-                information:{
-                    id: 1,
-                    subject: "Math",
-                    Location:"London",
-                    Price:100,
-                    image: "images/math.webp",
-                    Space:5
-                },
+                lessons: lessons,
                 cart:[]
             
             },
             methods: {
                 
-                addtocart: function(){
-                    this.cart.push(this.information.id);
-                }
+                addtocart: function(lesson){
+                    this.cart.push(lesson.id);
+                },
+                showCheckout(){
+                    this.showinformation = this.showinformation ? false : true
+                },
+                spaceLeft(lesson) {
+                let countInCart = this.cart.filter(id => id === lesson.id).length;
+                return lesson.Space - countInCart;
+             },
+             canAddToCart: function(lesson) {
+                return this.spaceLeft(lesson) > 0;
+             }
                 
             },
             computed: {
                  cartItemCount: function() {
                  return this.cart.length || "";
-             },
-                canAddToCart: function() {
-                return this.information.Space > this.cartItemCount;
-             },
-
-             SpaceLeft() {
-                return this.information.Space - this.cartItemCount;
              }
+            
          }
         })
     </script>
