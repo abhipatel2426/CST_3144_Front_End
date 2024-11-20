@@ -42,10 +42,13 @@ new Vue({
                 this.cart.splice(index, 1);
             }
         },
-        isFormValid() {
-            return this.user.name && this.user.phone;
+        validatePhone() {
+            // Remove any character that is not a number
+            this.user.phone = this.user.phone.replace(/[^0-9]/g, '');
         },
+       
         submitOrder() {
+            
             console.log('User data before submission:', this.user);
             if (!this.user.name || !this.user.phone) {
                 alert('Please provide both name and phone.');
@@ -96,7 +99,12 @@ new Vue({
         },
         totalPrice() {
             return this.cart.reduce((sum, lesson) => sum + lesson.Price, 0);
-        }
+        },
+        isFormValid() {
+             // Phone must be numeric and non-empty
+        const isPhoneValid = /^[0-9]+$/.test(this.user.phone) && this.user.phone.trim() !== '';
+            return this.user.name.trim() !== '' && this.user.phone.trim() !== '';
+        },
        
     }
 });

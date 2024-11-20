@@ -66,14 +66,20 @@
                     </P>
                     <P>
                         <strong>Phone:</strong>
-                        <input v-model.trim="user.phone" required>
+                        <input v-model.trim="user.phone" @input="validatePhone"required>
                     </P>
+
+                    <p v-if="user.phone && !/^[0-9]+$/.test(user.phone)" style="color: red;">
+                        Please enter a valid phone number.
+                    </p>
 
                     <h4>Order Information</h4>
                     <P>Name: {{user.name}}</P>
                     <P>Phone: {{user.phone}}</P>
 
                     <button v-on:click="submitOrder" :disabled="!isFormValid">Place Order</button>
+                    <p v-if="!isFormValid" style="color: red;">Please fill out both Name and Phone Number to place the order.</p>
+
                 </div>
                 <div v-else>
                     <h3>Your cart is empty</h3>
