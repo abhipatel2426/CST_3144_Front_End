@@ -34,12 +34,19 @@ new Vue({
             this.cart.push(lesson);
         },
         showCheckout() {
-            this.showinformation = !this.showinformation; // Toggle visibility
+            if (this.cart.length > 0) {
+                this.showinformation = !this.showinformation;
+            } else {
+                alert('Your cart is empty. Add lessons to proceed.');
+            } // Toggle visibility
         },
         removeFromCart(lesson) {
             const index = this.cart.indexOf(lesson);
             if (index > -1) {
                 this.cart.splice(index, 1);
+            }
+            if (this.cart.length === 0) {
+                this.showinformation = true; // Redirect to lessons view if the cart is empty
             }
         },
         validatePhone() {
@@ -105,6 +112,10 @@ new Vue({
         const isPhoneValid = /^[0-9]+$/.test(this.user.phone) && this.user.phone.trim() !== '';
             return this.user.name.trim() !== '' && this.user.phone.trim() !== '';
         },
-       
+        canCheckout() {
+            return this.cart.length > 0;
+        }
+        
+        
     }
 });
