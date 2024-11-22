@@ -9,7 +9,9 @@ new Vue({
             name: '',
             phone: ''
         },
-        showLessons: true
+        showLessons: true,
+        sortAttribute: 'subject', // Default sorting attribute
+        sortOrder: 'asc' // Default sorting order
     },
     created() {
         // Fetch lessons from backend
@@ -21,6 +23,18 @@ new Vue({
             .catch(err => console.error('Error fetching lessons:', err));
     },
     methods: {
+        sortLessons() {
+            this.lessons.sort((a, b) => {
+                let comparison = 0;
+                if (a[this.sortAttribute] > b[this.sortAttribute]) {
+                    comparison = 1;
+                } else if (a[this.sortAttribute] < b[this.sortAttribute]) {
+                    comparison = -1;
+                }
+                return this.sortOrder === 'asc' ? comparison : -comparison;
+            });
+        },
+    
         spaceLeft(lesson) {
             // Calculate the remaining space for a lesson
             let countInCart = this.cart.filter(cartLesson => cartLesson.id === lesson.id).length;
@@ -117,5 +131,9 @@ new Vue({
         }
         
         
+    },
+    watch: {
+        sortAttribute: 'sortLessons',
+        sortOrder: 'sortLessons'
     }
 });

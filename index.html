@@ -25,6 +25,28 @@
         </header>
         <main>
             <div v-if="showinformation">
+                <!---Sorting controls------>
+
+                <div>
+                    <p>Currently sorted by {{ sortAttribute }} in {{ sortOrder }} order.</p>
+ 
+                    <label for="sortAttribute">Sort By:</label>
+                    <select v-model="sortAttribute" id="sortAttribute">
+                        <option value="subject">Subject</option>
+                        <option value="Location">Location</option>
+                        <option value="Price">Price</option>
+                        <option value="Space">Spaces</option>
+                    </select>
+                
+                    <label for="sortOrder">Order:</label>
+                    <select v-model="sortOrder" id="sortOrder">
+                        <option value="asc">Ascending</option>
+                        <option value="desc">Descending</option>
+                    </select>
+                
+                    
+                </div>
+                
                 <div v-for="lesson in lessons" :key="lesson.id">
 
                     <figure>
