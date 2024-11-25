@@ -11,7 +11,9 @@ new Vue({
         },
         showLessons: true,
         sortAttribute: 'subject', // Default sorting attribute
-        sortOrder: 'asc' // Default sorting order
+        sortOrder: 'asc', // Default sorting order
+        searchQuery: "",
+
     },
     created() {
         // Fetch lessons from backend
@@ -70,7 +72,7 @@ new Vue({
        
         submitOrder() {
             
-            console.log('User data before submission:', this.user);
+            
             if (!this.user.name || !this.user.phone) {
                 alert('Please provide both name and phone.');
                 return;
@@ -101,19 +103,82 @@ new Vue({
                 }
                 return response.json();
             })
-                .then(data => {
+                .then(async data => {
                     if (data.error) {
                         alert('Order submission failed: ' + data.error);
                     } else {
                         alert('Order placed successfully! Order ID: ' + data.orderId);
+
+
+                            // Update spaces for each lesson in the order
+                            const updateRequests = order.lessonIDs.map((lessonId, index) => {
+                                const spacesToDeduct = order.spaces[index];
+                                return fetch(`http://localhost:3050/lessons/${lessonId}`, {
+                                    method: 'PUT',
+                                    headers: {
+                                        'Content-Type': 'application/json'
+                                    },
+                                    body: JSON.stringify({ newSpace: spacesToDeduct })
+                                });
+                            });
+
+                            // Wait for all PUT requests to complete
+                await Promise.all(updateRequests); 
+                // Fetch updated lessons from the server
+                fetch('http://localhost:3050/lessons')
+                    .then(res => res.json())
+                    .then(updatedLessons => {
+                        this.lessons = updatedLessons; // Update lessons in frontend
+                   
                         this.cart = [];
                         this.user = { name: '', phone: '' };
-                        this.showLessons = true;
+                        this.showinformation = true;
+                    });
                     }
                 })
                 .catch(err => console.error('Error submitting order:', err));
+        },
+        updateLessonSpace(lessonId, newSpace) {
+            fetch(`http://localhost:3050/lessons/${lessonId}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ newSpace })
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                alert('Lesson space updated successfully');
+                this.fetchLessons(); // Refresh lessons from the server
+            })
+            .catch(err => console.error('Error updating lesson space:', err));
+        },
+        searchLessons() {
+            if (!this.searchQuery.trim()) {
+                alert('Please enter a search query.');
+                return;
+            }
+    
+            fetch(`http://localhost:3050/search?query=${encodeURIComponent(this.searchQuery)}`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Search failed.');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    this.lessons = data; // Update lessons with search results
+                })
+                .catch(err => console.error('Error during search:', err));
         }
+
     },
+    
     computed: {
         cartItemCount() {
             return this.cart.length || '';
@@ -134,6 +199,11 @@ new Vue({
     },
     watch: {
         sortAttribute: 'sortLessons',
-        sortOrder: 'sortLessons'
+        sortOrder: 'sortLessons',
+        searchQuery(newQuery) {
+            if (newQuery.trim()) {
+                this.searchLessons();
+            }
+        }
     }
 });
