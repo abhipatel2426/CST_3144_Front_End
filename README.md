@@ -4,6 +4,8 @@
 A dynamic and user-friendly front-end application built with **Vue.js** for managing lessons. Users can browse, search, sort, and purchase lessons seamlessly, with real-time updates and interactive features.
 
 ---
+# Link for github and github-pages
+https://github.com/abhipatel2426/CST_3144_Front_End
 
 ## Features
 
