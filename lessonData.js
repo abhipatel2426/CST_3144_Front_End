@@ -41,20 +41,54 @@ const lessons = [
     },
     {
         "id": 6,
-        "subject": "Sport",
-        "Location": "Mehasana",
-        "Price": 400,
-        "image": "images/sport.png",
-        "Space": 5
+        "subject": "Programming",
+        "Location": "New York",
+        "Price": 250,
+        "image": "images/programming",
+        "Space": 10
     },
     {
         "id": 7,
-        "subject": "Sport",
-        "Location": "Mehasana",
-        "Price": 400,
-        "image": "images/sport.png",
-        "Space": 5
-    }
+        "subject": "History",
+        "Location": "Paris",
+        "Price": 180,
+        "image": "images/history.png",
+        "Space": 8
+    },
+        {
+            "id": 8,
+            "subject": "Art",
+            "Location": "Milan",
+            "Price": 220,
+            "Space": 6,
+            "image": "images/art.png"
+        },
+        {
+            "id": 9,
+            "subject": "Geography",
+            "Location": "Sydney",
+            "Price": 190,
+            "Space": 7,
+            "image": "images/geograohy.png"
+        },
+        {
+            "id": 10,
+            "subject": "Biology",
+            "Location": "Tokyo",
+            "Price": 250,
+            "Space": 5,
+            "image": "images/bio.png"
+        },
+        {
+            "id": 11,
+            "subject": "Chemistry",
+            "Location": "Berlin",
+            "Price": 280,
+            "Space": 8,
+            "image": "images/chemistry.png"
+        }
+   
+   
 
 ];
 // Export for server use
