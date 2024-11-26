@@ -19,14 +19,17 @@ new Vue({
     },
     created() {
         // Fetch lessons from backend
-        fetch(`${BACKEND_URL}/lessons`)
-            .then(response => response.json())
-            .then(data => {
-                this.lessons = data;
-            })
-            .catch(err => console.error('Error fetching lessons:', err));
+        this.fetchLessons();
     },
     methods: {
+         fetchLessons() {
+            fetch(`${BACKEND_URL}/lessons`)
+                .then(response => response.json())
+                .then(data => {
+                    this.lessons = data;
+                })
+                .catch(err => console.error('Error fetching lessons:', err));
+        },
         sortLessons() {
             this.lessons.sort((a, b) => {
                 let comparison = 0;
@@ -127,15 +130,14 @@ new Vue({
                             // Wait for all PUT requests to complete
                 await Promise.all(updateRequests); 
                 // Fetch updated lessons from the server
-                fetch(`${BACKEND_URL}/lessons`)
-                    .then(res => res.json())
-                    .then(updatedLessons => {
+                this.fetchLessons();
+                   
                         this.lessons = updatedLessons; // Update lessons in frontend
                    
                         this.cart = [];
                         this.user = { name: '', phone: '' };
                         this.showinformation = true;
-                    });
+                    
                     }
                 })
                 .catch(err => console.error('Error submitting order:', err));
