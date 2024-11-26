@@ -1,0 +1,247 @@
+[{
+  "_id": {
+    "$oid": "673cf9855dfe57ff082b32db"
+  },
+  "name": "John Doe",
+  "phone": "1234567890",
+  "lessonIDs": [
+    1,
+    2
+  ],
+  "spaces": [
+    2,
+    1
+  ],
+  "space": [
+    5,
+    10
+  ]
+},
+{
+  "_id": {
+    "$oid": "673d32b22ac547efcabc12d0"
+  },
+  "name": "John Doe",
+  "phone": "1234567890",
+  "lessonIDs": [
+    1,
+    2
+  ],
+  "spaces": [
+    2,
+    1
+  ]
+},
+{
+  "_id": {
+    "$oid": "673d39372ac547efcabc12d1"
+  },
+  "name": "abhi",
+  "phone": "23465",
+  "lessonIDs": [
+    1
+  ],
+  "spaces": [
+    1
+  ]
+},
+{
+  "_id": {
+    "$oid": "673d3dba2ac547efcabc12d2"
+  },
+  "name": "abhi",
+  "phone": "34646",
+  "lessonIDs": [
+    1
+  ],
+  "spaces": [
+    1
+  ]
+},
+{
+  "_id": {
+    "$oid": "67448107d93be06afbe3f83c"
+  },
+  "name": "abhi",
+  "phone": "7895678",
+  "lessonIDs": [
+    1,
+    1,
+    1
+  ],
+  "spaces": [
+    1,
+    1,
+    1
+  ]
+},
+{
+  "_id": {
+    "$oid": "674497eb3f0987e711633083"
+  },
+  "name": "abhhh",
+  "phone": "123456789",
+  "lessonIDs": [
+    1,
+    1
+  ],
+  "spaces": [
+    1,
+    1
+  ]
+},
+{
+  "_id": {
+    "$oid": "67449c6a3f0987e711633084"
+  },
+  "name": "abb",
+  "phone": "0987654321",
+  "lessonIDs": [
+    2
+  ],
+  "spaces": [
+    1
+  ]
+},
+{
+  "_id": {
+    "$oid": "67449e763f0987e711633085"
+  },
+  "name": "ddd",
+  "phone": "0987654321",
+  "lessonIDs": [
+    1
+  ],
+  "spaces": [
+    1
+  ]
+},
+{
+  "_id": {
+    "$oid": "6744a2063f0987e711633086"
+  },
+  "name": "bbb",
+  "phone": "1231231230",
+  "lessonIDs": [
+    1
+  ],
+  "spaces": [
+    1
+  ]
+},
+{
+  "_id": {
+    "$oid": "6744b0c2e73394c3d5a81f6e"
+  },
+  "name": "abhhh",
+  "phone": "234567",
+  "lessonIDs": [
+    1
+  ],
+  "spaces": [
+    1
+  ]
+},
+{
+  "_id": {
+    "$oid": "6744bed396804f5b44c40637"
+  },
+  "name": "ayush",
+  "phone": "1232222",
+  "lessonIDs": [
+    1
+  ],
+  "spaces": [
+    1
+  ]
+},
+{
+  "_id": {
+    "$oid": "6744c11f96804f5b44c40638"
+  },
+  "name": "John 777",
+  "phone": "1234567890",
+  "lessonIDs": [
+    1,
+    3
+  ],
+  "spaces": [
+    2,
+    1
+  ]
+},
+{
+  "_id": {
+    "$oid": "67454312b3418cf57547a8cc"
+  },
+  "name": "John 89",
+  "phone": "1234567890",
+  "lessonIDs": [
+    1,
+    2
+  ],
+  "spaces": [
+    1,
+    1
+  ]
+},
+{
+  "_id": {
+    "$oid": "67454329b3418cf57547a8cd"
+  },
+  "name": "nj",
+  "phone": "120",
+  "lessonIDs": [
+    1
+  ],
+  "spaces": [
+    1
+  ]
+},
+{
+  "_id": {
+    "$oid": "6745bf1929e2858d90793cf5"
+  },
+  "name": "mth",
+  "phone": "1233",
+  "lessonIDs": [
+    11
+  ],
+  "spaces": [
+    1
+  ]
+},
+{
+  "_id": {
+    "$oid": "6745c1ab29e2858d90793cf6"
+  },
+  "name": "ccc",
+  "phone": "444",
+  "lessonIDs": [
+    6,
+    6,
+    2,
+    2
+  ],
+  "spaces": [
+    1,
+    1,
+    1,
+    1
+  ]
+},
+{
+  "_id": {
+    "$oid": "6745c26629e2858d90793cf7"
+  },
+  "name": "Jo 89",
+  "phone": "1234567890",
+  "lessonIDs": [
+    1,
+    2
+  ],
+  "spaces": [
+    1,
+    1
+  ]
+}]
