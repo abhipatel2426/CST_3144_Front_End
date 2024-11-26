@@ -113,6 +113,7 @@ new Vue({
                         alert('Order submission failed: ' + data.error);
                     } else {
                         alert('Order placed successfully! Order ID: ' + data.orderId);
+                        window.location.reload();
 
 
                             // Update spaces for each lesson in the order
