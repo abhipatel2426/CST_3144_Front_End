@@ -1,3 +1,5 @@
+const BACKEND_URL = 'https://lessons-app.onrender.com';
+
 new Vue({
     el: '#app',
     data: {
@@ -17,7 +19,7 @@ new Vue({
     },
     created() {
         // Fetch lessons from backend
-        fetch('http://localhost:3050/lessons')
+        fetch(`${BACKEND_URL}/lessons`)
             .then(response => response.json())
             .then(data => {
                 this.lessons = data;
@@ -90,7 +92,7 @@ new Vue({
             };
             console.log('Submitting order:', order);
 
-            fetch('http://localhost:3050/order', {
+            fetch(`${BACKEND_URL}/order`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -113,7 +115,7 @@ new Vue({
                             // Update spaces for each lesson in the order
                             const updateRequests = order.lessonIDs.map((lessonId, index) => {
                                 const spacesToDeduct = order.spaces[index];
-                                return fetch(`http://localhost:3050/lessons/${lessonId}`, {
+                                return fetch(`${BACKEND_URL}/lessons/${lessonId}`, {
                                     method: 'PUT',
                                     headers: {
                                         'Content-Type': 'application/json'
@@ -125,7 +127,7 @@ new Vue({
                             // Wait for all PUT requests to complete
                 await Promise.all(updateRequests); 
                 // Fetch updated lessons from the server
-                fetch('http://localhost:3050/lessons')
+                fetch(`${BACKEND_URL}/lessons`)
                     .then(res => res.json())
                     .then(updatedLessons => {
                         this.lessons = updatedLessons; // Update lessons in frontend
@@ -139,7 +141,7 @@ new Vue({
                 .catch(err => console.error('Error submitting order:', err));
         },
         updateLessonSpace(lessonId, newSpace) {
-            fetch(`http://localhost:3050/lessons/${lessonId}`, {
+            fetch(`${BACKEND_URL}/lessons/${lessonId}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'
@@ -164,7 +166,7 @@ new Vue({
                 return;
             }
     
-            fetch(`http://localhost:3050/search?query=${encodeURIComponent(this.searchQuery)}`)
+            fetch(`${BACKEND_URL}/search?query=${encodeURIComponent(this.searchQuery)}`)
                 .then(response => {
                     if (!response.ok) {
                         throw new Error('Search failed.');
