@@ -6,6 +6,7 @@ A dynamic and user-friendly front-end application built with **Vue.js** for mana
 ---
 # Link for github and github-pages
 https://github.com/abhipatel2426/CST_3144_Front_End
+https://abhipatel2426.github.io/CST_3144_Front_End/
 
 ## Features
 
